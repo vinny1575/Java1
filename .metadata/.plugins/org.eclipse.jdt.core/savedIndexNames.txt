@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+/Volumes/Macintosh HD/Users/Vinny1575/Documents/Dropbox/Fullsail/Java Dev (Android)/Java1/.metadata/.plugins/org.eclipse.jdt.core
+2011414192.index
+2322658311.index
