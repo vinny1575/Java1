@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.ivinny.json.JsonData&apos; to &apos;CitiesT&apos;&#x0A;- Original project: &apos;TempCalc20&apos;&#x0A;- Original element: &apos;com.ivinny.json.JsonData&apos;&#x0A;- Renamed element: &apos;com.ivinny.json.CitiesT&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;JsonData&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.ivinny.json{JsonData.java[JsonData" matchStrategy="1" name="CitiesT" qualified="false" references="true" similarDeclarations="false" stamp="1366371882946" textual="false" version="1.0"/>
+</session>

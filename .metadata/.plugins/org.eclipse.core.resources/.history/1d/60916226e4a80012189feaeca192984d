@@ -1,0 +1,14 @@
+package com.ivinny.json;
+
+public enum JsonData {
+	Boston,Jacksonville,Atlanta,SanDiego,Dallas;
+	
+	public boolean isCold(int tempFarhenheit){
+		
+		if (tempFarhenheit < 30){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}

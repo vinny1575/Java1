@@ -1,0 +1,11 @@
+package com.ivinny.json;
+
+public class json {
+	public static String getJsonString(){
+		return "{Boston:21," +
+				"Jacksonville:60," +
+				"Atalanta: 29," +
+				"SanDiego:75," +
+				"Dallas:41}";
+	}
+}

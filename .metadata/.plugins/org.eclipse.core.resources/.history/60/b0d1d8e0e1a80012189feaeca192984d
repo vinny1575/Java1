@@ -1,0 +1,13 @@
+package com.ivinny.json;
+
+public class json {
+	public static String getJsonString(){
+		return "{Cities: " +
+				"[{name: Boston, temp: 21}," +
+				"{name: Jacksonville, temp: 60}," +
+				"{name: Atalanta, temp: 29}," +
+				"{name: SanDiego temp: 75}," +
+				"{name: Dallas, temp: 41}]" +
+				"}";
+	}
+}

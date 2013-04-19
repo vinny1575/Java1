@@ -1,0 +1,5 @@
+package com.ivinny.json;
+
+public enum jsonData {
+	Boston,Jacksonville,Atlanta,SanDiego,Dallas;
+}
