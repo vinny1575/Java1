@@ -5,7 +5,7 @@ public enum CitiesT {
 	Boston("Boston"),
 	Jacksonville("Jacksonville"),
 	Atlanta("Atlanta"),
-	SanDiego("SanDiego"),
+	SanDiego("San Diego"),
 	Dallas("Dallas");
 	
 	private String type;
@@ -26,11 +26,11 @@ public enum CitiesT {
         return null;
     }
     
-	public String isCold(int tempFarhenheit){
+	public String isCold(double tempFarhenheit){
 		
-		if (tempFarhenheit < 30){
+		if (tempFarhenheit < 30.2){
 			return "Very Cold";
-		}else if (tempFarhenheit < 50){
+		}else if (tempFarhenheit < 50.1){
 			return "Kinda Warm";
 		}else{
 			return "Very Warm";

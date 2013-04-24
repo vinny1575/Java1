@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;alt_bld&apos; in &apos;com.ivinny.tempcalc.MainActivity.getTempForCityFromWebSvc(...)&apos; to &apos;alt&apos;&#x0A;- Original project: &apos;TempCalc20&apos;&#x0A;- Original element: &apos;com.ivinny.tempcalc.MainActivity.getTempForCityFromWebSvc(String, String).alt_bld&apos;&#x0A;- Renamed element: &apos;alt_bld&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;alt_bld&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.ivinny.tempcalc{MainActivity.java[MainActivity~getTempForCityFromWebSvc~QString;~QString;@alt_bld!7266!7326!7278!7284!QAlertDialog;!0!false" name="alt" references="true" stamp="1366810758922" version="1.0"/>
+</session>
