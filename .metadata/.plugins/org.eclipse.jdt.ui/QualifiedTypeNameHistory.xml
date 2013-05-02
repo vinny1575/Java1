@@ -31,8 +31,6 @@
 <fullyQualifiedTypeName name="org.apache.http.impl.client.BasicResponseHandler"/>
 <fullyQualifiedTypeName name="java.net.URI"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
-<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
 <fullyQualifiedTypeName name="java.net.URLConnection"/>
 <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
@@ -53,4 +51,11 @@
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.os.AsyncTask"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="com.ivinny.tempcalc.WeatherAsync"/>
+<fullyQualifiedTypeName name="com.ivinny.tempcalc.R.layout"/>
+<fullyQualifiedTypeName name="com.ivinny.tempcalc.R.id"/>
+<fullyQualifiedTypeName name="com.ivinny.tempcalc.R.style"/>
 </qualifiedTypeNameHistroy>
