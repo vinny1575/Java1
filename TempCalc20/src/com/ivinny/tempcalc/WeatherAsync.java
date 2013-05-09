@@ -10,10 +10,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
 class WeatherAsync extends AsyncTask<String, Void, String> {
+	ProgressDialog progressDialog;
+
     @Override
     protected String doInBackground(String... urls) {
       String response = "";

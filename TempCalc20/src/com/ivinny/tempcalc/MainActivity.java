@@ -49,6 +49,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager.Request;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -73,44 +74,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		final Context context = this;
 		setTheme(R.style.myTheme);
 		//adds the types from the resources 
-		types = new String[3];
-		types[0] = getString(R.string.f);
-		types[1] = getString(R.string.c);
-		types[2] = getString(R.string.k);
-		
+
 		ll = (LinearLayout) getLayoutInflater().inflate(R.layout.form, null);
 		ll.setOrientation(LinearLayout.VERTICAL);
 		lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 		ll.setLayoutParams(lp);
 		
-//		LinearLayout entryBox = MyForm.singleEntryWithButton(this, "EnterFarhenheit", "Convert");
-//		ll.addView(entryBox);
-		
-		//simple info view
-		TextView tv = (TextView)ll.findViewById(R.id.textView2);;
-		tv.setText("Convert Fahrenheit to Celsius and Kelvin");
-				
-		et = (EditText)ll.findViewById(R.id.editText1);
-		et.setHint("Enter Farhenheit");
-//		ll.addView(et);
-		
-		Button b = (Button)ll.findViewById(R.id.button1);
-		b.setText("Convert");
-//		ll.addView(b);
-		b.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				updateTemps(et.getText().toString());
-			}
-		});
-		
-		
-		result = (TextView)ll.findViewById(R.id.textView1);;
-//		ll.addView(result);
 		
 		//button used to download json data (for now we aren just simulating this)
 		Button getDataBtn = (Button)ll.findViewById(R.id.button2);;
@@ -168,16 +140,34 @@ public class MainActivity extends Activity {
 							String text = "";
 						    for(int i=0;i<cities.length();i++){
 						    	//getting json from string in jsonobject
-						        JSONObject json_data = cities.getJSONObject(i).getJSONObject("current_observation");;
-						        String city =  json_data.getJSONObject("display_location").getString("city");
+						        final JSONObject json_data = cities.getJSONObject(i).getJSONObject("current_observation");;
+						        final String city =  json_data.getJSONObject("display_location").getString("city");
+						        final String url = json_data.getString("forecast_url");
 						        //enum from string
-						        Log.i("city", city);
 						        CitiesT jType = CitiesT.fromLetter(city);
 						        
-						        double temp =  json_data.getDouble("temp_f");
+						        final double temp =  json_data.getDouble("temp_f");
 						        // .. get all value here
 						        Log.i("City: ", city);  
-						        text = text+"\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
+						        Button cityB = new Button(context);
+						        cityB.setText(city+": "+temp+" ("+jType.isCold(temp)+")");
+						        cityB.setOnClickListener(new View.OnClickListener() {
+									
+									@Override
+									public void onClick(View v) {
+										// TODO Auto-generated method stub
+										Intent intent = new Intent(context, ConversionActivity.class);
+						                Bundle bundleObj = new Bundle();
+						                //Just pass a username to other screen
+						                bundleObj.putString("city", city);
+						                bundleObj.putString("url", url);
+						                bundleObj.putString("temp", Double.toString(temp));
+						                intent.putExtras(bundleObj);
+										startActivity(intent);
+									}
+								});
+						        ll.addView(cityB);
+//						        text = text+"\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
 						    }
 						    dataTView.setText(text);
 						    
@@ -257,88 +247,9 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		return returnStr;
-//	    HttpClient httpclient = new DefaultHttpClient();
-//
-//	    // Prepare a request object
-//	    HttpGet httpget = new HttpGet(url); 
-//
-//	    // Execute the request
-//	    HttpResponse response;
-//	    try {
-//	        response = httpclient.execute(httpget);
-//	        // Examine the response status
-//	        Log.i("Praeda",response.getStatusLine().toString());
-//
-//	        // Get hold of the response entity
-//	        HttpEntity entity = response.getEntity();
-//	        // If the response does not enclose an entity, there is no need
-//	        // to worry about connection release
-//
-//	        if (entity != null) {
-//
-//	            // A Simple JSON Response Read
-//	            InputStream instream = entity.getContent();
-//	            result= convertStreamToString(instream);
-//	            // now you have the string representation of the HTML request
-//	            Log.i(TAG, result);
-//	            instream.close();
-//	        }
-//
-//
-//	    } catch (Exception e) {
-//	    	Log.i("Connection", e.toString());
-//	    }
-//			    
-//		Log.i("json", result);
-//		return result;
 	}
 	
-    private static String convertStreamToString(InputStream is) {
-	    /*
-	     * To convert the InputStream to String we use the BufferedReader.readLine()
-	     * method. We iterate until the BufferedReader return null which means
-	     * there's no more data to read. Each line will appended to a StringBuilder
-	     * and returned as String.
-	     */
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	    StringBuilder sb = new StringBuilder();
-	
-	    String line = null;
-	    try {
-	        while ((line = reader.readLine()) != null) {
-	            sb.append(line + "\n");
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            is.close();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    return sb.toString();
-    }
-	
-	//does the temp conversion
-	public void updateTemps(String temp){
-		String text = "";
-		for(int i = 0; i<types.length; i++){
-			String type = types[i];
-			Float finalTemp = new Float(0);
-			Boolean isF = type == getString(R.string.f);
-			Boolean isC = type == getString(R.string.c);
-			if(isF){
-				finalTemp = Float.parseFloat(temp);
-			}else if(isC){
-				finalTemp = (float) ((Float.parseFloat(temp)-32)*.55);
-			}else{
-				finalTemp = (float) ((Float.parseFloat(temp)-32)*.55 + 273.15);
-			}
-			text = text+"\r\n"+finalTemp+" "+type;
-		}
-		result.setText(text);
-	}
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
