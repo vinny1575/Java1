@@ -1,7 +1,0 @@
-package com.ivinny.tempcalc;
-
-import android.os.AsyncTask;
-
-public class WeatherAsync extends AsyncTask<Params, Progress, Result> {
-
-}
