@@ -1,42 +1,68 @@
 package com.ivinny.tempcalc;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ivnny.lib.MyForm;
 import com.ivinny.json.CitiesT;
 import com.ivinny.json.Json;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DownloadManager.Request;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainFragment extends Fragment {
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-	}
-	
+@SuppressLint("UseValueOf")
+public class MainActivity extends Activity {
+
+	private static final String TAG = "Network";
 	LinearLayout ll;
 	LinearLayout.LayoutParams lp;
 	EditText et;
@@ -45,14 +71,14 @@ public class MainFragment extends Fragment {
 	TextView dataTView;
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		
-		final Context context = getActivity();
+		final Context context = this;
+		setTheme(R.style.myTheme);
 		//adds the types from the resources 
 
-		ll = (LinearLayout) inflater.inflate(R.layout.form, container, false);
+		ll = (LinearLayout) getLayoutInflater().inflate(R.layout.form, null);
 		ll.setOrientation(LinearLayout.VERTICAL);
 		lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 		ll.setLayoutParams(lp);
@@ -70,7 +96,7 @@ public class MainFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+				ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo ni = cm.getActiveNetworkInfo();
 				if(ni!=null){
 					if(ni.isConnected()){
@@ -147,7 +173,7 @@ public class MainFragment extends Fragment {
 						    
 						    //writing a cache file
 						    String content = text;
-						    File file = new File(getActivity().getCacheDir(), "appCache");
+						    File file = new File(getCacheDir(), "appCache");
 						    FileOutputStream fos = new FileOutputStream(file.getAbsolutePath(), true);
 						    fos.write(content.getBytes());
 						    fos.close();
@@ -169,19 +195,15 @@ public class MainFragment extends Fragment {
 			}
 		});
 		
-		return ll;
-	}
-	
-	@Override
-	public void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
+//		//like setting rootviewcontroller on ios
+		setContentView(ll);
+		
 	}
 	
 	//alert for no internet
 	public void showAlert(){
 		try {
-			File cacheFile = new File(getActivity().getCacheDir(), "appCache");
+			File cacheFile = new File(getCacheDir(), "appCache");
 			if(cacheFile.exists()){	//if cache exists use it
 				FileInputStream fis = new FileInputStream(cacheFile);
 				StringBuffer fileContent = new StringBuffer("");
@@ -195,7 +217,7 @@ public class MainFragment extends Fragment {
 				fis.close();
 				
 			}else{		//else show alert
-				AlertDialog.Builder alt = new AlertDialog.Builder(getActivity());     
+				AlertDialog.Builder alt = new AlertDialog.Builder(this);     
 				alt.setMessage("Not Connected To The Internet.").setPositiveButton("OK", null);
 				alt.show();
 			}
@@ -210,6 +232,7 @@ public class MainFragment extends Fragment {
 
 	//get network data (specific weather info for city and state
 	public String getTempForCityFromWebSvc(String city, String state){
+		String result = "";
 
 		String url = "http://api.wunderground.com/api/87a8ccdf84e0370d/conditions/q/"+state+"/"+city+".json";
 		WeatherAsync resp = new WeatherAsync();
@@ -226,4 +249,13 @@ public class MainFragment extends Fragment {
 		return returnStr;
 	}
 	
+
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
 }

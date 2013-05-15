@@ -28,14 +28,16 @@ public class ConversionFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
+		getActivity().setTheme(R.style.myTheme);
+		
 		types = new String[3];
 		types[0] = getString(R.string.f);
 		types[1] = getString(R.string.c);
 		types[2] = getString(R.string.k);
 		
 		
-		LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.conversion, container, false);
+		LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.conversion_fragment, container, false);
 
 		//simple info view
 		TextView tv = (TextView)ll.findViewById(R.id.textView1);;

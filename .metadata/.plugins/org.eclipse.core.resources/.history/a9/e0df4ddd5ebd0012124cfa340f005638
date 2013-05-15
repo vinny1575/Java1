@@ -50,6 +50,7 @@ public class MainFragment extends Fragment {
 		// TODO Auto-generated method stub
 		
 		final Context context = getActivity();
+		getActivity().setTheme(R.style.myTheme);
 		//adds the types from the resources 
 
 		ll = (LinearLayout) inflater.inflate(R.layout.form, container, false);

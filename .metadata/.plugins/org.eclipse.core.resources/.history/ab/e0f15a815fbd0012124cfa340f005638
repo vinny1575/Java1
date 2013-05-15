@@ -35,7 +35,7 @@ public class ConversionFragment extends Fragment {
 		types[2] = getString(R.string.k);
 		
 		
-		LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.conversion, container, false);
+		LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.conversion_fragment, container, false);
 
 		//simple info view
 		TextView tv = (TextView)ll.findViewById(R.id.textView1);;
