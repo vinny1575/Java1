@@ -62,9 +62,9 @@ public class ConversionFragment extends Fragment {
 				
 		et = (EditText)ll.findViewById(R.id.editText1);
 		et.setHint("Enter Farhenheit");
-//		if(lastTemp > 0){
-//			et.setText(String.valueOf(lastTemp));
-//		}
+		if(lastTemp > 0){
+			et.setText(String.valueOf(lastTemp));
+		}
 //				ll.addView(et);
 		
 		Button b = (Button)ll.findViewById(R.id.button1);
