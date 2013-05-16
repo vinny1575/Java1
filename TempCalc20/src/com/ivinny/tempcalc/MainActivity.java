@@ -4,6 +4,9 @@ package com.ivinny.tempcalc;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.view.Menu;
 
 @SuppressLint("UseValueOf")
@@ -15,6 +18,7 @@ public class MainActivity extends Activity {
 
 		setTheme(R.style.myTheme);
 		setContentView(R.layout.main_fragment);
+		
 		
 	}
 	

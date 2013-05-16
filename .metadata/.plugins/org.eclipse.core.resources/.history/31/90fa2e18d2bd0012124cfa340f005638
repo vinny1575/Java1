@@ -1,0 +1,49 @@
+package com.ivinny.tempcalc;
+
+
+import android.os.Bundle;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.view.Menu;
+
+@SuppressLint("UseValueOf")
+public class MainActivity extends Activity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setTheme(R.style.myTheme);
+		
+        FragmentManager fm       = getFragmentManager();
+        Fragment        fragment = fm.findFragmentById(R.id.mainfragid); // You can find Fragments just like you would with a 
+                                                                               // View by using FragmentManager.
+        
+        // If we are using activity_fragment_xml.xml then this the fragment will not be
+        // null, otherwise it will be.
+        if (fragment == null) {
+    		setContentView(R.layout.main_fragment);
+            // We alter the state of Fragments in the FragmentManager using a FragmentTransaction. 
+            // FragmentTransaction's have access to a Fragment back stack that is very similar to the Activity
+            // back stack in your app's task. If you add a FragmentTransaction to the back stack, a user 
+            // can use the back button to undo a transaction. We will cover that topic in more depth in
+            // the second part of the tutorial.
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.mainfragid, new MainFragment());
+            ft.commit(); // Make sure you call commit or your Fragment will not be added. 
+                         // This is very common mistake when working with Fragments!
+        }
+		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

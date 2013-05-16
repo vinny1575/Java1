@@ -5473,3 +5473,6 @@ Binding(CTRL+SHIFT+ARROW_RIGHT,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.jdt.ui.javaEditorScope,,cocoa,system)
+
+!ENTRY com.android.ide.eclipse.adt 1 0 2013-05-15 20:51:28.760
+!MESSAGE No valid Android XML Editor Delegate found for file /TempCalc20/AndroidManifest.xml [Res null, type null]

@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainFragment extends Fragment {
@@ -48,7 +49,7 @@ public class MainFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		
+		 setRetainInstance(true);
 		final Context context = getActivity();
 		//adds the types from the resources 
 
@@ -130,14 +131,22 @@ public class MainFragment extends Fragment {
 									@Override
 									public void onClick(View v) {
 										// TODO Auto-generated method stub
-										Intent intent = new Intent(context, ConversionActivity.class);
-						                Bundle bundleObj = new Bundle();
-						                //Just pass a username to other screen
-						                bundleObj.putString("city", city);
-						                bundleObj.putString("url", url);
-						                bundleObj.putString("temp", Double.toString(temp));
-						                intent.putExtras(bundleObj);
-										startActivity(intent);
+										
+									    ConversionFragment viewer = (ConversionFragment) getFragmentManager()
+									            .findFragmentById(R.id.confragid);
+									    if (viewer == null || !viewer.isInLayout()) {
+											Intent intent = new Intent(context, ConversionActivity.class);
+							                Bundle bundleObj = new Bundle();
+							                //Just pass a username to other screen
+							                bundleObj.putString("city", city);
+							                bundleObj.putString("url", url);
+							                bundleObj.putString("temp", Double.toString(temp));
+							                intent.putExtras(bundleObj);
+											startActivity(intent);
+									    } else {
+									        viewer.updateUI(url, city, Double.toString(temp));
+									    }
+
 									}
 								});
 						        ll.addView(cityB);
@@ -169,7 +178,9 @@ public class MainFragment extends Fragment {
 			}
 		});
 		
-		return ll;
+		ScrollView sv = new ScrollView(getActivity());
+		sv.addView(ll);
+		return sv;
 	}
 	
 	@Override

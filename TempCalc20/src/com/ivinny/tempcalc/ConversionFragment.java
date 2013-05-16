@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,9 @@ public class ConversionFragment extends Fragment {
 	
 	String[] types;
 	TextView result;
-	
+	String url = "";
+	TextView tv;
+	EditText et;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -38,10 +41,10 @@ public class ConversionFragment extends Fragment {
 		LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.conversion, container, false);
 
 		//simple info view
-		TextView tv = (TextView)ll.findViewById(R.id.textView1);;
+		tv = (TextView)ll.findViewById(R.id.textView1);;
 		tv.setText("Convert Fahrenheit to Celsius and Kelvin");
 				
-		final EditText et = (EditText)ll.findViewById(R.id.editText1);
+		et = (EditText)ll.findViewById(R.id.editText1);
 		et.setHint("Enter Farhenheit");
 //				ll.addView(et);
 		
@@ -61,33 +64,39 @@ public class ConversionFragment extends Fragment {
 		
 		result = (TextView)ll.findViewById(R.id.textView2);
 		
-		String url = "";
+		
         Bundle bundleObj= getActivity().getIntent().getExtras();
         try {
         		String temp = bundleObj.get("temp").toString();
         		String city = bundleObj.get("city").toString();
         		url = bundleObj.get("url").toString();
-        		tv.setText("Convert Fahrenheit to Celsius and Kelvin for " + city);
-                et.setText(temp);
-                updateTemps(temp);
+                updateUI(url, city, temp);
         }
         catch (Exception e) {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         
-        final String finalURL = url;
 		Button mInfoB = (Button)ll.findViewById(R.id.button2);
 		mInfoB.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(finalURL));
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 				startActivity(browserIntent);
 			}
 		});
 		
-		return ll;
+		ScrollView sv = new ScrollView(getActivity());
+		sv.addView(ll);
+		return sv;
+	}
+	
+	public void updateUI(String aUrl, String aCity, String aTemp){
+		url = aUrl;
+		tv.setText("Convert Fahrenheit to Celsius and Kelvin for " + aCity);
+        et.setText(aTemp);
+        updateTemps(aTemp);
 	}
 	
 	//does the temp conversion
