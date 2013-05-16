@@ -30,11 +30,11 @@ public final class R {
         public static final int button2=0x7f090003;
         public static final int confragid=0x7f090005;
         public static final int editText1=0x7f090001;
-        public static final int imageView1=0x7f090007;
-        public static final int mainfragid=0x7f090008;
+        public static final int imageView1=0x7f090008;
+        public static final int mainfragid=0x7f090006;
         public static final int textView1=0x7f090000;
         public static final int textView2=0x7f090004;
-        public static final int textView3=0x7f090006;
+        public static final int textView3=0x7f090007;
     }
     public static final class integer {
         public static final int celsius=0x7f050001;

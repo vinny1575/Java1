@@ -21,6 +21,15 @@ public class ConversionFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		outState.putBoolean("clicked", clicked);
+		outState.putInt("lasTemp", lastTemp);
 	}
 	
 	String[] types;
@@ -28,10 +37,17 @@ public class ConversionFragment extends Fragment {
 	String url = "";
 	TextView tv;
 	EditText et;
+	Boolean clicked = false;
+	int lastTemp = 0;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub		
+		
+//		if(savedInstanceState != null){
+//			clicked = savedInstanceState.getBoolean("clicked");
+//			lastTemp = savedInstanceState.getInt("lastTemp");
+//		}
+		
 		types = new String[3];
 		types[0] = getString(R.string.f);
 		types[1] = getString(R.string.c);
@@ -46,6 +62,9 @@ public class ConversionFragment extends Fragment {
 				
 		et = (EditText)ll.findViewById(R.id.editText1);
 		et.setHint("Enter Farhenheit");
+		if(lastTemp > 0){
+			et.setText(String.valueOf(lastTemp));
+		}
 //				ll.addView(et);
 		
 		Button b = (Button)ll.findViewById(R.id.button1);
@@ -57,6 +76,8 @@ public class ConversionFragment extends Fragment {
 			public void onClick(View v) {
 				
 				updateTemps(et.getText().toString());
+//				clicked = true;
+//				lastTemp = Integer.parseInt(et.getText().toString());
 			}
 		});
 		
@@ -89,6 +110,10 @@ public class ConversionFragment extends Fragment {
 		
 		ScrollView sv = new ScrollView(getActivity());
 		sv.addView(ll);
+		
+//		if(clicked){
+//			b.performClick();
+//		}
 		return sv;
 	}
 	
