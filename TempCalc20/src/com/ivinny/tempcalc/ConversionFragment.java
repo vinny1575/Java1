@@ -29,7 +29,7 @@ public class ConversionFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 		outState.putBoolean("clicked", clicked);
-		outState.putInt("lasTemp", lastTemp);
+		outState.putString("lastTemp", lastTemp);
 	}
 	
 	String[] types;
@@ -38,15 +38,16 @@ public class ConversionFragment extends Fragment {
 	TextView tv;
 	EditText et;
 	Boolean clicked = false;
-	int lastTemp = 0;
+	String lastTemp;
+    Button submitBtn;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-//		if(savedInstanceState != null){
-//			clicked = savedInstanceState.getBoolean("clicked");
-//			lastTemp = savedInstanceState.getInt("lastTemp");
-//		}
+		if(savedInstanceState != null){
+			clicked = savedInstanceState.getBoolean("clicked");
+			lastTemp = savedInstanceState.getString("lastTemp");
+		}
 		
 		types = new String[3];
 		types[0] = getString(R.string.f);
@@ -67,19 +68,19 @@ public class ConversionFragment extends Fragment {
 //		}
 //				ll.addView(et);
 		
-		Button b = (Button)ll.findViewById(R.id.button1);
-		b.setText("Convert");
-//				ll.addView(b);
-		b.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				updateTemps(et.getText().toString());
-//				clicked = true;
-//				lastTemp = Integer.parseInt(et.getText().toString());
-			}
-		});
+		submitBtn = (Button)ll.findViewById(R.id.button1);
+		submitBtn.setText("Convert");
+//				ll.addView(submitBtn);
+		submitBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                updateTemps(et.getText().toString());
+                clicked = true;
+                lastTemp = et.getText().toString();
+            }
+        });
 		
 
 		
@@ -102,7 +103,7 @@ public class ConversionFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				// external intent
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 				startActivity(browserIntent);
 			}
@@ -110,14 +111,19 @@ public class ConversionFragment extends Fragment {
 		
 		ScrollView sv = new ScrollView(getActivity());
 		sv.addView(ll);
-		
-//		if(clicked){
-//			b.performClick();
-//		}
+
 		return sv;
 	}
-	
-	public void updateUI(String aUrl, String aCity, String aTemp){
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(clicked){
+            updateTemps(lastTemp);
+        }
+    }
+
+    public void updateUI(String aUrl, String aCity, String aTemp){
 		url = aUrl;
 		tv.setText("Convert Fahrenheit to Celsius and Kelvin for " + aCity);
         et.setText(aTemp);

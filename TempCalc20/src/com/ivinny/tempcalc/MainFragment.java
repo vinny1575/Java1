@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import android.os.Handler;
+import java.util.logging.LogRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +17,7 @@ import com.ivinny.json.CitiesT;
 import com.ivinny.json.Json;
 
 import android.R.bool;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -22,6 +25,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,13 +40,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainFragment extends Fragment {
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
-	}
-	
+
 	LinearLayout ll;
 	LinearLayout.LayoutParams lp;
 	EditText et;
@@ -50,8 +50,28 @@ public class MainFragment extends Fragment {
 	String jsonStr;
 	boolean clicked = false;
 	int index = -1;
-	
-	@Override
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    OnHeadlineSelectedListener mCallBack;
+
+    // Container Activity must implement this interface
+    public interface OnHeadlineSelectedListener {
+        public void onCitySelected(String city, String url, String temp);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallBack = (OnHeadlineSelectedListener)activity;
+    }
+
+    @Override
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
@@ -124,112 +144,132 @@ public class MainFragment extends Fragment {
 				try {
 					JSONObject citiesToGet = new JSONObject(Json.getJsonString());
 					ar = citiesToGet.getJSONArray("Cities");
-					 
+
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				JSONArray cities = new JSONArray();
-				
+
 				//adds results for fetch (json string) to an array of cities info
 				for(int i = 0; i<ar.length(); i++){
 					jsonStr = null;
 					try {
-						jsonStr = getTempForCityFromWebSvc(ar.getJSONObject(i).getString("city"), ar.getJSONObject(i).getString("state"));
+						getTempForCityFromWebSvc(ar.getJSONObject(i).getString("city"), ar.getJSONObject(i).getString("state"));
 						Log.i("json", jsonStr);
 					} catch (JSONException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-					// TODO Auto-generated method stub
-					JSONObject jsonObj = null;
-					//using try catches to avoid app lockups
-					try {
-						Log.i("json", jsonStr);
-						jsonObj = new JSONObject(jsonStr);
-						cities.put(jsonObj);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+//
+//					// TODO Auto-generated method stub
+//					JSONObject jsonObj = null;
+//					//using try catches to avoid app lockups
+//					try {
+//						Log.i("json", jsonStr);
+//						jsonObj = new JSONObject(jsonStr);
+//						cities.put(jsonObj);
+//					} catch (JSONException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 				}
-
-				try {
-					String text = "";
-				    for(int i=0;i<cities.length();i++){
-				    	//getting json from string in jsonobject
-				        final JSONObject json_data = cities.getJSONObject(i).getJSONObject("current_observation");;
-				        final String city =  json_data.getJSONObject("display_location").getString("city");
-				        final String url = json_data.getString("forecast_url");
-				        //enum from string
-				        CitiesT jType = CitiesT.fromLetter(city);
-				        
-				        final double temp =  json_data.getDouble("temp_f");
-				        // .. get all value here
-				        Log.i("City: ", city);  
-				        Button cityB = new Button(context);
-				        cityB.setId(i);
-				        cityB.setText(city+": "+temp+" ("+jType.isCold(temp)+")");
-				        cityB.setOnClickListener(new View.OnClickListener() {
-							
-							@Override
-							public void onClick(View v) {
-								// TODO Auto-generated method stub
-								
-							    ConversionFragment viewer = (ConversionFragment) getFragmentManager()
-							            .findFragmentById(R.id.confragid);
-							    if (viewer == null || !viewer.isInLayout()) {
-									Intent intent = new Intent(context, ConversionActivity.class);
-					                Bundle bundleObj = new Bundle();
-					                //Just pass a username to other screen
-					                bundleObj.putString("city", city);
-					                bundleObj.putString("url", url);
-					                bundleObj.putString("temp", Double.toString(temp));
-					                intent.putExtras(bundleObj);
-									startActivity(intent);
-							    } else {
-							        viewer.updateUI(url, city, Double.toString(temp));
-							    }
-							    index = v.getId();
-							}
-						});
-				        ll.addView(cityB);
-//				        text = text+"\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
-				    }
-				    dataTView.setText(text);
-				    
-				    //writing a cache file
-				    String content = text;
-				    File file = new File(getActivity().getCacheDir(), "appCache");
-				    FileOutputStream fos = new FileOutputStream(file.getAbsolutePath(), true);
-				    fos.write(content.getBytes());
-				    fos.close();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//
+//				try {
+//					String text = "";
+//				    for(int i=0;i<cities.length();i++){
+//				    	//getting json from string in jsonobject
+//				        final JSONObject json_data = cities.getJSONObject(i).getJSONObject("current_observation");;
+//				        final String city =  json_data.getJSONObject("display_location").getString("city");
+//				        final String url = json_data.getString("forecast_url");
+//				        //enum from string
+//				        CitiesT jType = CitiesT.fromLetter(city);
+//
+//				        final double temp =  json_data.getDouble("temp_f");
+//				        // .. get all value here
+//				        Log.i("City: ", city);
+//				        Button cityB = new Button(context);
+//				        cityB.setId(i);
+//				        cityB.setText(city+": "+temp+" ("+jType.isCold(temp)+")");
+//				        cityB.setOnClickListener(new View.OnClickListener() {
+//
+//							@Override
+//							public void onClick(View v) {
+//								// TODO Auto-generated method stub
+//
+//                                mCallBack.onCitySelected(city, url, Double.toString(temp));
+//							    index = v.getId();
+//							}
+//						});
+//				        ll.addView(cityB);
+////				        text = text+"\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
+//				    }
+//				    dataTView.setText(text);
+//
+//				    //writing a cache file
+//				    String content = text;
+//				    File file = new File(getActivity().getCacheDir(), "appCache");
+//				    FileOutputStream fos = new FileOutputStream(file.getAbsolutePath(), true);
+//				    fos.write(content.getBytes());
+//				    fos.close();
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 			}else{
 				showAlert();
 			}
 		}else{
 			showAlert();
+
 		}
 		
 		if(index >= 0){
 			ll.findViewById(index).hasFocus();
 		}
 	}
-	
+
+    int i = 0;
+    public void addCityBtn(String jsonStr) throws JSONException {
+        //getting json from string in jsonobject
+        JSONObject jsonObj = new JSONObject(jsonStr);
+        final JSONObject json_data = jsonObj.getJSONObject("current_observation");
+        final String city =  json_data.getJSONObject("display_location").getString("city");
+        final String url = json_data.getString("forecast_url");
+        //enum from string
+        CitiesT jType = CitiesT.fromLetter(city);
+
+        final double temp =  json_data.getDouble("temp_f");
+        // .. get all value here
+        Log.i("City: ", city);
+        Button cityB = new Button(getActivity());
+        cityB.setId(i);
+        cityB.setText(city+": "+temp+" ("+jType.isCold(temp)+")");
+        cityB.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                mCallBack.onCitySelected(city, url, Double.toString(temp));
+                index = v.getId();
+            }
+        });
+        ll.addView(cityB);
+        i++;
+    }
 	//alert for no internet
 	public void showAlert(){
 		try {
 			File cacheFile = new File(getActivity().getCacheDir(), "appCache");
 			if(cacheFile.exists()){	//if cache exists use it
+                AlertDialog.Builder alt = new AlertDialog.Builder(getActivity());
+                alt.setMessage("Not Connected To The Internet. Using old data.").setPositiveButton("OK", null);
+                alt.show();
 				FileInputStream fis = new FileInputStream(cacheFile);
 				StringBuffer fileContent = new StringBuffer("");
 	
@@ -255,22 +295,39 @@ public class MainFragment extends Fragment {
 		}
 	}
 
+
 	//get network data (specific weather info for city and state
-	public String getTempForCityFromWebSvc(String city, String state){
+	public void getTempForCityFromWebSvc(String city, String state){
+
+        Handler messageHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                Bundle reply = msg.getData();
+                String json = reply.getString("json");
+                try {
+                    addCityBtn(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
 		String url = "http://api.wunderground.com/api/87a8ccdf84e0370d/conditions/q/"+state+"/"+city+".json";
-		WeatherAsync resp = new WeatherAsync();
-		String returnStr = null;
-		try {
-			returnStr = resp.execute(url).get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return returnStr;
+        Intent msgIntent = new Intent(getActivity(), WeatherIntentService.class);
+        msgIntent.putExtra(WeatherIntentService.PARAM_IN_MSG, url);
+        msgIntent.putExtra("messenger", new Messenger(messageHandler));
+        getActivity().startService(msgIntent);
+
+//		WeatherAsync resp = new WeatherAsync();
+//		try {
+//			returnStr = resp.execute(url).get();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 }
