@@ -149,76 +149,47 @@ public class MainFragment extends Fragment {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+                //Array of cities to add
 				JSONArray cities = new JSONArray();
+
+                //clear text
+                dataTView.setText("");
+
+                //remove buttons
+                for (int i = 0; i<5; i++){
+                    ll.removeView(ll.findViewById(i));
+                }
+
+                //clear cache
+                String content = "";
+                File file = new File(getActivity().getCacheDir(), "appCache");
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(file.getAbsolutePath(), false);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fos.write(content.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 				//adds results for fetch (json string) to an array of cities info
 				for(int i = 0; i<ar.length(); i++){
 					jsonStr = null;
 					try {
 						getTempForCityFromWebSvc(ar.getJSONObject(i).getString("city"), ar.getJSONObject(i).getString("state"));
-						Log.i("json", jsonStr);
 					} catch (JSONException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-//
-//					// TODO Auto-generated method stub
-//					JSONObject jsonObj = null;
-//					//using try catches to avoid app lockups
-//					try {
-//						Log.i("json", jsonStr);
-//						jsonObj = new JSONObject(jsonStr);
-//						cities.put(jsonObj);
-//					} catch (JSONException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-				}
-//
-//				try {
-//					String text = "";
-//				    for(int i=0;i<cities.length();i++){
-//				    	//getting json from string in jsonobject
-//				        final JSONObject json_data = cities.getJSONObject(i).getJSONObject("current_observation");;
-//				        final String city =  json_data.getJSONObject("display_location").getString("city");
-//				        final String url = json_data.getString("forecast_url");
-//				        //enum from string
-//				        CitiesT jType = CitiesT.fromLetter(city);
-//
-//				        final double temp =  json_data.getDouble("temp_f");
-//				        // .. get all value here
-//				        Log.i("City: ", city);
-//				        Button cityB = new Button(context);
-//				        cityB.setId(i);
-//				        cityB.setText(city+": "+temp+" ("+jType.isCold(temp)+")");
-//				        cityB.setOnClickListener(new View.OnClickListener() {
-//
-//							@Override
-//							public void onClick(View v) {
-//								// TODO Auto-generated method stub
-//
-//                                mCallBack.onCitySelected(city, url, Double.toString(temp));
-//							    index = v.getId();
-//							}
-//						});
-//				        ll.addView(cityB);
-////				        text = text+"\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
-//				    }
-//				    dataTView.setText(text);
-//
-//				    //writing a cache file
-//				    String content = text;
-//				    File file = new File(getActivity().getCacheDir(), "appCache");
-//				    FileOutputStream fos = new FileOutputStream(file.getAbsolutePath(), true);
-//				    fos.write(content.getBytes());
-//				    fos.close();
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+                }
 				
 			}else{
 				showAlert();
@@ -234,7 +205,10 @@ public class MainFragment extends Fragment {
 	}
 
     int i = 0;
-    public void addCityBtn(String jsonStr) throws JSONException {
+    public void addCityBtn(String jsonStr) throws JSONException, FileNotFoundException {
+        if (i > 4 ){
+            i = 0;
+        }
         //getting json from string in jsonobject
         JSONObject jsonObj = new JSONObject(jsonStr);
         final JSONObject json_data = jsonObj.getJSONObject("current_observation");
@@ -261,6 +235,23 @@ public class MainFragment extends Fragment {
         });
         ll.addView(cityB);
         i++;
+
+        String text = "\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
+        //writing a cache file
+        String content = text;
+        File file = new File(getActivity().getCacheDir(), "appCache");
+        FileOutputStream fos = new FileOutputStream(file.getAbsolutePath(), true);
+
+        try {
+            fos.write(content.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 	//alert for no internet
 	public void showAlert(){
@@ -307,6 +298,8 @@ public class MainFragment extends Fragment {
                 try {
                     addCityBtn(json);
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }

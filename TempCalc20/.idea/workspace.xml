@@ -22,7 +22,7 @@
     <file path="/a.html" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1368712811593" ignored="false" />
     <file path="/a.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1368712837976" ignored="false" />
     <file path="/sample.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1368712837064" ignored="false" />
-    <file path="/MainFragment.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369313847999" ignored="false" />
+    <file path="/MainFragment.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369315620354" ignored="false" />
     <file path="/fragment.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369271928025" ignored="false" />
     <file path="/ConversionFragment.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369279759547" ignored="false" />
     <file path="/ConversionActivity.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369281082167" ignored="false" />
@@ -98,51 +98,6 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java" line="318" class="com.ivinny.tempcalc.MainFragment" package="com.ivinny.tempcalc">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java" line="239" class="com.ivinny.tempcalc.MainFragment" package="com.ivinny.tempcalc">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java" line="157" class="com.ivinny.tempcalc.MainFragment" package="com.ivinny.tempcalc">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
     </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
@@ -174,15 +129,15 @@
       <file leaf-file-name="MainFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="164" column="32" selection-start="4637" selection-end="4637" vertical-scroll-proportion="0.5667351">
+            <state line="208" column="17" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.27104723">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3113#3231#0" expanded="true" />
                 <element signature="e#3226#3227#0" expanded="true" />
-                <element signature="e#7703#7983#0" expanded="true" />
-                <element signature="e#7972#7973#0" expanded="true" />
-                <element signature="e#9317#9695#0" expanded="true" />
-                <element signature="e#9684#9685#0" expanded="true" />
+                <element signature="e#6603#6883#0" expanded="true" />
+                <element signature="e#6872#6873#0" expanded="true" />
+                <element signature="e#8758#9229#0" expanded="true" />
+                <element signature="e#9218#9219#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -191,7 +146,7 @@
       <file leaf-file-name="WeatherIntentService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.0">
+            <state line="30" column="0" selection-start="787" selection-end="787" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -555,12 +510,12 @@
       <workItem from="1368713002412" duration="29000" />
       <workItem from="1369016872690" duration="297000" />
       <workItem from="1369189836170" duration="82000" />
-      <workItem from="1369237267868" duration="22554000" />
+      <workItem from="1369237267868" duration="24857000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23105000" />
+    <option name="totallyTimeSpent" value="25408000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1645" y="-567" width="1420" height="985" extended-state="0" />
@@ -571,7 +526,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37572256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37572256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -780,7 +735,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.0">
+        <state line="30" column="0" selection-start="787" selection-end="787" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -789,15 +744,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="32" selection-start="4637" selection-end="4637" vertical-scroll-proportion="0.5667351">
+        <state line="208" column="17" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.27104723">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3113#3231#0" expanded="true" />
             <element signature="e#3226#3227#0" expanded="true" />
-            <element signature="e#7703#7983#0" expanded="true" />
-            <element signature="e#7972#7973#0" expanded="true" />
-            <element signature="e#9317#9695#0" expanded="true" />
-            <element signature="e#9684#9685#0" expanded="true" />
+            <element signature="e#6603#6883#0" expanded="true" />
+            <element signature="e#6872#6873#0" expanded="true" />
+            <element signature="e#8758#9229#0" expanded="true" />
+            <element signature="e#9218#9219#0" expanded="true" />
           </folding>
         </state>
       </provider>

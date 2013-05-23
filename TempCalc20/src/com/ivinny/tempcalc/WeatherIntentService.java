@@ -21,7 +21,6 @@ import java.io.InputStreamReader;
  */
 public class WeatherIntentService extends IntentService {
     public static final String PARAM_IN_MSG = "imsg";
-    public static final String PARAM_OUT_MSG = "omsg";
 
     public WeatherIntentService(){
         super("WeatherIntentService");
