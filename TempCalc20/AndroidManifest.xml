@@ -18,6 +18,7 @@
         android:theme="@style/AppTheme" >
         <service android:name="com.ivinny.tempcalc.WeatherIntentService" />
         <provider
+                android:exported="true"
                 android:name="com.ivinny.tempcalc.WeatherContentProvider"
                 android:authorities="com.ivinny.application.weathercontentprovider" />
         <activity

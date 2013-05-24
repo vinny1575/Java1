@@ -5,7 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
+
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
 import java.util.logging.LogRecord;
 
@@ -41,6 +47,7 @@ import android.widget.TextView;
 
 public class MainFragment extends Fragment {
 
+
 	LinearLayout ll;
 	LinearLayout.LayoutParams lp;
 	EditText et;
@@ -56,6 +63,7 @@ public class MainFragment extends Fragment {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        insertContent();
     }
 
     OnHeadlineSelectedListener mCallBack;
@@ -82,7 +90,7 @@ public class MainFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+
 		if(savedInstanceState != null){
 			clicked = savedInstanceState.getBoolean("clicked");
 			index = savedInstanceState.getInt("index");
@@ -130,35 +138,23 @@ public class MainFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onPause();
 	}
-	
-	public void downloadBtnPress(final Context context){
-//		final ProgressBar progress = (ProgressBar)findViewById(R.id.progressBar1);
-		clicked = true;
-		
-		ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo ni = cm.getActiveNetworkInfo();
-		if(ni!=null){
-			if(ni.isConnected()){
-				Log.i("network","online");
-				JSONArray ar = null;
-				try {
-					JSONObject citiesToGet = new JSONObject(Json.getJsonString());
-					ar = citiesToGet.getJSONArray("Cities");
 
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-                //Array of cities to add
-				JSONArray cities = new JSONArray();
+    public void insertContent(){
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if(ni!=null){
+            if(ni.isConnected()){
+                JSONArray ar = null;
+                try {
+                    JSONObject citiesToGet = new JSONObject(Json.getJsonString());
+                    ar = citiesToGet.getJSONArray("Cities");
 
-                //clear text
-                dataTView.setText("");
-
-                //remove buttons
-                for (int i = 0; i<5; i++){
-                    ll.removeView(ll.findViewById(i));
+                } catch (JSONException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
                 }
+                //Array of cities to add
+                JSONArray cities = new JSONArray();
 
                 //clear cache
                 String content = "";
@@ -180,17 +176,88 @@ public class MainFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-				//adds results for fetch (json string) to an array of cities info
-				for(int i = 0; i<ar.length(); i++){
-					jsonStr = null;
-					try {
-						getTempForCityFromWebSvc(ar.getJSONObject(i).getString("city"), ar.getJSONObject(i).getString("state"));
-					} catch (JSONException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+                //adds results for fetch (json string) to an array of cities info
+                for(int i = 0; i<ar.length(); i++){
+                    jsonStr = null;
+                    try {
+                        getTempForCityFromWebSvc(ar.getJSONObject(i).getString("city"), ar.getJSONObject(i).getString("state"));
+                    } catch (JSONException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
-				
+            }else{
+                showAlert();
+            }
+        }else{
+            showAlert();
+
+        }
+
+    }
+
+    private static ArrayList<View> getViewsByTag(ViewGroup root, String tag){
+        ArrayList<View> views = new ArrayList<View>();
+        final int childCount = root.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            final View child = root.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                views.addAll(getViewsByTag((ViewGroup) child, tag));
+            }
+
+            final Object tagObj = child.getTag();
+            if (tagObj != null && tagObj.equals(tag)) {
+                views.add(child);
+            }
+
+        }
+        return views;
+    }
+
+	
+	public void downloadBtnPress(final Context context){
+//		final ProgressBar progress = (ProgressBar)findViewById(R.id.progressBar1);
+		clicked = true;
+
+        //        clear text
+        dataTView.setText("");
+
+        //remove buttons
+        ArrayList views = getViewsByTag(ll, "CityB");
+        for (int i = 0; i<views.size(); i++){
+            ll.removeView((View)views.get(i));
+        }
+
+		ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = cm.getActiveNetworkInfo();
+		if(ni!=null){
+			if(ni.isConnected()){
+				Log.i("network","online");
+                ArrayList list = new ArrayList();
+
+                Uri uri = Uri.parse("content://com.ivinny.application.weathercontentprovider");
+                Cursor cursor = getActivity().getContentResolver().query(uri, null,null,null,null);
+                if (cursor.moveToFirst() == true){
+                    for (int i = 0; i < cursor.getCount(); i++){
+                        HashMap<String, String> displayMap = new HashMap<String, String>();
+                        displayMap.put("city", cursor.getString(1));
+                        displayMap.put("url", cursor.getString(3));
+                        displayMap.put("temp", cursor.getString(2));
+
+//                        cursor.moveToNext();
+
+                        list.add(displayMap);
+
+                        try {
+                            addCityBtn(cursor.getString(1),cursor.getString(3),cursor.getString(2));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        cursor.moveToNext();
+                    }
+                }
 			}else{
 				showAlert();
 			}
@@ -198,45 +265,31 @@ public class MainFragment extends Fragment {
 			showAlert();
 
 		}
-		
-		if(index >= 0){
-			ll.findViewById(index).hasFocus();
-		}
 	}
 
-    int i = 0;
-    public void addCityBtn(String jsonStr) throws JSONException, FileNotFoundException {
-        if (i > 4 ){
-            i = 0;
-        }
-        //getting json from string in jsonobject
-        JSONObject jsonObj = new JSONObject(jsonStr);
-        final JSONObject json_data = jsonObj.getJSONObject("current_observation");
-        final String city =  json_data.getJSONObject("display_location").getString("city");
-        final String url = json_data.getString("forecast_url");
-        //enum from string
-        CitiesT jType = CitiesT.fromLetter(city);
+    public void addCityBtn(final String city, final String url, final String temp) throws JSONException, FileNotFoundException {
 
-        final double temp =  json_data.getDouble("temp_f");
+
+        CitiesT jType = CitiesT.fromLetter(city);
         // .. get all value here
         Log.i("City: ", city);
         Button cityB = new Button(getActivity());
-        cityB.setId(i);
-        cityB.setText(city+": "+temp+" ("+jType.isCold(temp)+")");
+//        cityB.setId(i);
+        cityB.setTag("CityB");
+        cityB.setText(city+": "+temp+" ("+jType.isCold(Double.parseDouble(temp))+")");
         cityB.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                mCallBack.onCitySelected(city, url, Double.toString(temp));
+                mCallBack.onCitySelected(city, url, temp);
                 index = v.getId();
             }
         });
         ll.addView(cityB);
-        i++;
 
-        String text = "\r\n"+city+": "+temp+" ("+jType.isCold(temp)+")";
+        String text = "\r\n"+city+": "+temp+" ("+jType.isCold(Double.parseDouble(temp))+")";
         //writing a cache file
         String content = text;
         File file = new File(getActivity().getCacheDir(), "appCache");
@@ -255,35 +308,9 @@ public class MainFragment extends Fragment {
     }
 	//alert for no internet
 	public void showAlert(){
-		try {
-			File cacheFile = new File(getActivity().getCacheDir(), "appCache");
-			if(cacheFile.exists()){	//if cache exists use it
-                AlertDialog.Builder alt = new AlertDialog.Builder(getActivity());
-                alt.setMessage("Not Connected To The Internet. Using old data.").setPositiveButton("OK", null);
-                alt.show();
-				FileInputStream fis = new FileInputStream(cacheFile);
-				StringBuffer fileContent = new StringBuffer("");
-	
-				byte[] buffer = new byte[1024];
-	
-				while (fis.read(buffer) != -1) {
-				    fileContent.append(new String(buffer));
-				}
-				dataTView.setText(fileContent.toString());
-				fis.close();
-				
-			}else{		//else show alert
-				AlertDialog.Builder alt = new AlertDialog.Builder(getActivity());     
-				alt.setMessage("Not Connected To The Internet.").setPositiveButton("OK", null);
-				alt.show();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        AlertDialog.Builder alt = new AlertDialog.Builder(getActivity());
+        alt.setMessage("Not Connected To The Internet.").setPositiveButton("OK", null);
+        alt.show();
 	}
 
 
@@ -294,14 +321,14 @@ public class MainFragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 Bundle reply = msg.getData();
-                String json = reply.getString("json");
-                try {
-                    addCityBtn(json);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+//                String json = reply.getString("json");
+//                try {
+//                    addCityBtn(json);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
             }
         };
 

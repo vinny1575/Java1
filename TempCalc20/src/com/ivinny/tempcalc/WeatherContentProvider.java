@@ -9,7 +9,13 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -34,8 +40,6 @@ public class WeatherContentProvider extends ContentProvider {
         public static final String TEMP_COLUMN = "temp";
         public static final String URL_COLUMN = "url";
 
-        public static final String[] PROJECTION = {"_Id", CITY_COLUMN, TEMP_COLUMN, URL_COLUMN};
-
         private WeatherData() {};
     }
 
@@ -52,6 +56,7 @@ public class WeatherContentProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         Log.d(TAG, "onCreate");
+        clearJSONFile();//clears the json file before adding to it.
         return true;
     }
 
@@ -68,12 +73,85 @@ public class WeatherContentProvider extends ContentProvider {
         return null;
     }
 
+    private void clearJSONFile(){
+        String content = "";
+        File file = new File(getContext().getCacheDir(), "json");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file.getAbsolutePath(), false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fos.write(content.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public Uri insert(Uri uri, ContentValues values) {
 
-        String content = text;
-        File file = new File(getCacheDir(), "appCache");
-        FileOutputStream fos = new FileOutputStream(file.getAbsolutePath(), true);
+        //get old json data first
+        File cacheFile = new File(getContext().getCacheDir(), "json");
+        FileInputStream fis = null;
+        JSONArray jsonAr = null;
+        if (cacheFile.exists()){
+
+            try {
+                fis = new FileInputStream(cacheFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            StringBuffer fileContent = new StringBuffer("");
+
+            byte[] buffer = new byte[1024];
+
+            try {
+                while (fis.read(buffer) != -1) {
+                    fileContent.append(new String(buffer));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String jsonStr = fileContent.toString();
+            try {
+                jsonAr = new JSONArray(jsonStr);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.i("LOOOOK", jsonStr);
+
+        }
+
+        //add to json next
+        if (jsonAr == null){
+            jsonAr = new JSONArray();
+        }
+        try {
+            JSONObject city = new JSONObject();
+            city.put(WeatherData.CITY_COLUMN, values.get("city"));
+            city.put(WeatherData.TEMP_COLUMN, values.get("temp"));
+            city.put(WeatherData.URL_COLUMN, values.get("url"));
+            jsonAr.put(city);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String content = jsonAr.toString();
+        File file = new File(getContext().getCacheDir(), "json");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file.getAbsolutePath(), false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             fos.write(content.getBytes());
@@ -87,7 +165,7 @@ public class WeatherContentProvider extends ContentProvider {
         }
 
         Log.d(TAG, "insert uri: " + uri.toString());
-        return null;
+        return uri;
     }
 
 
@@ -107,18 +185,55 @@ public class WeatherContentProvider extends ContentProvider {
                         String[] selectionArgs, String sortOrder) {
         Log.d(TAG, "query with uri: " + uri.toString());
 
-        MatrixCursor result = new MatrixCursor(new String[] {"_id","Column1"});
+        MatrixCursor result = new MatrixCursor(new String[] {"_id","city","temp","url"});
 
-        String JSONString = Storage.readStringFile
-
-        switch(uriMatcher.match(uri)){
-            case ITEMS:
-                return WeatherData.CONTENT_TYPE;
-
-            case ITMES_ID:
-                return WeatherData.CONTENT_ITEM_TYPE;
+        File cacheFile = new File(getContext().getCacheDir(), "json");
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(cacheFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        return null;
+        StringBuffer fileContent = new StringBuffer("");
+
+        byte[] buffer = new byte[1024];
+
+        try {
+            while (fis.read(buffer) != -1) {
+                fileContent.append(new String(buffer));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String jsonStr = fileContent.toString();
+        Log.i("JSONSTRING", jsonStr);
+        JSONArray jsonAr = null;
+        try {
+            jsonAr = new JSONArray(jsonStr);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        for (int i=0; i < jsonAr.length(); i++)
+        {
+            try {
+                JSONObject city = jsonAr.getJSONObject(i);
+                result.addRow(new Object[] {i, city.get(WeatherData.CITY_COLUMN), city.get(WeatherData.TEMP_COLUMN), city.get(WeatherData.URL_COLUMN)});
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+//        switch(uriMatcher.match(uri)){
+//            case ITEMS:
+//                return WeatherData.CONTENT_TYPE;
+//
+//            case ITMES_ID:
+//                return WeatherData.CONTENT_ITEM_TYPE;
+//        }
+        return result;
 
     }
 
