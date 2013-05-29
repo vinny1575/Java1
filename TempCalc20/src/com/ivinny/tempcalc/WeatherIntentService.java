@@ -10,6 +10,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.util.Log;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import com.ivinny.json.CitiesT;
 
@@ -48,15 +50,19 @@ public class WeatherIntentService extends IntentService {
                 response += s;
             }
 
+            Log.i("JSONSTRING", response);
+
             Bundle bundle = intent.getExtras();
             Bundle myB = new Bundle();
             myB.putString("json", response);
 
-            JSONObject jsonObj = new JSONObject(response);
-            final JSONObject json_data = jsonObj.getJSONObject("current_observation");
-            final String city =  json_data.getJSONObject("display_location").getString("city");
-            final String theUrl = json_data.getString("forecast_url");
-            final double temp =  json_data.getDouble("temp_f");
+
+            //3rd party library GSON
+            JsonObject jsonObj = new Gson().fromJson(response, JsonObject.class);
+            final JsonObject json_data = jsonObj.getAsJsonObject("current_observation");
+            final String city =  json_data.getAsJsonObject("display_location").get("city").getAsString();
+            final String theUrl = json_data.get("forecast_url").getAsString();
+            final double temp =  json_data.get("temp_f").getAsDouble();
 
             Uri uri = Uri.parse("content://com.ivinny.application.weathercontentprovider");
             Log.i("LOOOOK", uri.toString());

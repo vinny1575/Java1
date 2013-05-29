@@ -11,7 +11,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="jsonstr" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6cd5f10-b4a3-4313-9855-e17042dca327" name="Default" comment="" />
@@ -26,12 +26,12 @@
     <file path="/fragment.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369271928025" ignored="false" />
     <file path="/ConversionFragment.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369279759547" ignored="false" />
     <file path="/ConversionActivity.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369281082167" ignored="false" />
-    <file path="/WeatherIntentService.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369348626031" ignored="false" />
+    <file path="/WeatherIntentService.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369827510266" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369342619784" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/ivinny/tempcalc/Manifest.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369342622979" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/ivinny/tempcalc/R.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369342622979" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/ivinny/tempcalc/BuildConfig.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369342626141" ignored="false" />
-    <file path="/WeatherContentProvider.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369362599830" ignored="false" />
+    <file path="/WeatherContentProvider.java" changelist="f6cd5f10-b4a3-4313-9855-e17042dca327" time="1369827932742" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +95,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="21" selection-start="555" selection-end="555" vertical-scroll-proportion="-4.8">
+            <state line="19" column="21" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -104,7 +104,7 @@
       <file leaf-file-name="ConversionFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/ConversionFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="27" selection-start="82" selection-end="86" vertical-scroll-proportion="-1.8">
+            <state line="3" column="27" selection-start="82" selection-end="86" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -119,29 +119,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainFragment.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="33" selection-start="2027" selection-end="2027" vertical-scroll-proportion="0.6933333">
+            <state line="334" column="0" selection-start="10527" selection-end="10527" vertical-scroll-proportion="-167.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3277#3395#0" expanded="true" />
-                <element signature="e#3390#3391#0" expanded="true" />
                 <element signature="e#5918#5924#0" expanded="true" />
                 <element signature="e#7465#7481#0" expanded="true" />
-                <element signature="e#8777#9040#0" expanded="true" />
-                <element signature="e#9029#9030#0" expanded="true" />
-                <element signature="e#10037#10524#0" expanded="true" />
-                <element signature="e#10513#10514#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeatherIntentService.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="WeatherIntentService.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="869" selection-end="869" vertical-scroll-proportion="-4.8">
+            <state line="60" column="0" selection-start="1764" selection-end="2191" vertical-scroll-proportion="0.5125285">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -152,10 +146,8 @@
       <file leaf-file-name="WeatherContentProvider.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherContentProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="5" selection-start="5538" selection-end="5538" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="16" column="31" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,10 +156,7 @@
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state line="22" column="86" selection-start="729" selection-end="913" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#558#576#0" expanded="true" />
-                <element signature="e#1018#1036#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -185,15 +174,15 @@
         <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/ConversionFragment.java" />
         <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/MainActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java" />
         <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/ConversionActivity.java" />
         <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java" />
         <option value="$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherContentProvider.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="41" />
+    <option name="x" value="20" />
     <option name="y" value="22" />
     <option name="width" value="1420" />
     <option name="height" value="815" />
@@ -224,7 +213,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -319,30 +307,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TempCalc20" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TempCalc20" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -355,16 +326,21 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="editor" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0149BD3418008018" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="jellybean" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libs" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.TempCalc20">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -519,36 +495,37 @@
       <workItem from="1368713002412" duration="29000" />
       <workItem from="1369016872690" duration="297000" />
       <workItem from="1369189836170" duration="82000" />
-      <workItem from="1369237267868" duration="50531000" />
+      <workItem from="1369237267868" duration="51112000" />
+      <workItem from="1369777323634" duration="7102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51082000" />
+    <option name="totallyTimeSpent" value="58765000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="41" y="22" width="1420" height="815" extended-state="0" />
+    <frame x="20" y="22" width="1420" height="815" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38417265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38417265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805756" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32805756" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496361" sideWeight="0.6158273" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496361" sideWeight="0.6719425" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805756" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5323741" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -617,14 +594,21 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="86" selection-start="729" selection-end="913" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/conversion.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainActivity.java">
@@ -642,40 +626,38 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/conversion.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/view/LayoutInflater.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="29" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.37121212">
-          <folding />
-        </state>
+        <state line="33" column="29" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.37121212" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/conversion_fragment.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="6" selection-start="298" selection-end="298" vertical-scroll-proportion="0.42857143">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main_fragment.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main_fragment.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherAsync.java">
@@ -688,28 +670,7 @@
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="86" selection-start="729" selection-end="913" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#558#576#0" expanded="true" />
-            <element signature="e#1018#1036#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="869" selection-end="869" vertical-scroll-proportion="-4.8">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherContentProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="5" selection-start="5538" selection-end="5538" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -722,31 +683,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/ConversionFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="27" selection-start="82" selection-end="86" vertical-scroll-proportion="-1.8">
+        <state line="3" column="27" selection-start="82" selection-end="86" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="21" selection-start="555" selection-end="555" vertical-scroll-proportion="-4.8">
+        <state line="19" column="21" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/MainFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="33" selection-start="2027" selection-end="2027" vertical-scroll-proportion="0.6933333">
+        <state line="334" column="0" selection-start="10527" selection-end="10527" vertical-scroll-proportion="-167.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3277#3395#0" expanded="true" />
-            <element signature="e#3390#3391#0" expanded="true" />
             <element signature="e#5918#5924#0" expanded="true" />
             <element signature="e#7465#7481#0" expanded="true" />
-            <element signature="e#8777#9040#0" expanded="true" />
-            <element signature="e#9029#9030#0" expanded="true" />
-            <element signature="e#10037#10524#0" expanded="true" />
-            <element signature="e#10513#10514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherContentProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ivinny/tempcalc/WeatherIntentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="0" selection-start="1764" selection-end="2191" vertical-scroll-proportion="0.5125285">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
